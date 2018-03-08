@@ -8,22 +8,24 @@ import java.util.concurrent.Executors;
  */
 public class ZooInfo {
 
-   private static ExecutorService service;
+    private static ExecutorService service;
+
     public static void main(String[] args) {
-        try{
-        service = Executors.newSingleThreadExecutor();
+        try {
+            service = Executors.newSingleThreadExecutor();
 
-        System.out.println("begin");
-        service.execute(() -> System.out.println("Printing zoo inventory"));
-        service.execute(() -> {
-            for(int i =0; i < 3; i++) System.out.println("Printing record "+i);
-        });
-        service.execute(()->{
-            System.out.println("Printing zoo inventory");
-        });
-        System.out.println("end");
+            System.out.println("begin");
+            service.execute(() -> System.out.println("Printing zoo inventory"));
+            service.execute(() -> {
+                for (int i = 0; i < 3; i++) System.out.println("Printing record " + i);
+            });
+            service.execute(() -> {
+                System.out.println("Printing zoo inventory");
+            });
+            System.out.println("end");
 
-    }catch(Exception e){
-        if(service != null) service.shutdown();
+        } catch (Exception e) {
+            if (service != null) service.shutdown();
+        }
     }
-}}
+}
